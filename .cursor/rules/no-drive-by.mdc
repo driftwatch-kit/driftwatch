@@ -1,0 +1,15 @@
+---
+description: TEASER — no drive-by refactors. Incomplete; the full pack ties this to Scope + CI.
+alwaysApply: false
+---
+
+# TEASER: no drive-by refactors
+
+> This is a Driftwatch teaser rule, not the full kit.
+
+If the ticket is a null check, do not also reformat billing, rewrite
+the linter config, or "clean up" a sibling file in the same directory.
+
+The paid pack treats multi-area diffs and same-directory siblings
+without a Scope block as a failed PR (`out_of_scope`), not a style
+note. This teaser does not.

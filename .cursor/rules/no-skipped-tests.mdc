@@ -1,0 +1,16 @@
+---
+description: TEASER — do not skip tests to go green. Incomplete; the full pack flags skip markers in CI.
+alwaysApply: false
+---
+
+# TEASER: do not skip tests to go green
+
+> This is a Driftwatch teaser rule, not the full kit.
+
+Do not add `it.skip`, `xit`, `@pytest.mark.skip`, `@pytest.mark.xfail`,
+Mocha `this.skip()`, or Rust `#[ignore]` to make a red test disappear.
+Fix the test or the code.
+
+The paid pack also forbids emptied bodies, deleted test files, weakened
+matchers, and gutted snapshots, and the GitHub Action fails the PR
+(`skipped_test`) when those markers show up in the diff. This teaser does not.
