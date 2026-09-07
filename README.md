@@ -55,7 +55,7 @@ Honest inventory of the paid Kit (v0.2.0, created 2026-08-31):
 
 Languages the checker looks at for tests, skips, and assertions: **JS/TS** (Jest / Vitest / Mocha), **Python** (pytest / unittest), **Rust** (`#[ignore]`). Dependency manifests: JS, Python, Go, Rust.
 
-This public repo is the **teaser**: three shorter rules, not CI.
+This public repo is the **teaser**: three shorter rules, not CI. The same files also live under `rules/` for [Open Plugins](https://open-plugins.com) / Cursor Directory discovery; Cursor users still use `.cursor/rules/`.
 
 ## Error codes
 

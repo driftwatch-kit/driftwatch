@@ -1,0 +1,16 @@
+---
+description: TEASER — declare PR scope. Incomplete; the full Driftwatch rule is stricter and CI-enforced.
+alwaysApply: false
+---
+
+# TEASER: declare PR scope
+
+> This is a Driftwatch teaser rule, not the full kit.
+
+Before editing, write down which paths you are allowed to touch. Do not
+"just fix" a second package in the same PR. A title that names one file
+is not permission to edit its sibling.
+
+The paid pack requires a machine-parseable `Scope:` block, forbids
+formatting-only drive-bys, and fails CI (`out_of_scope`) when the diff
+escapes that list. This teaser does not.
