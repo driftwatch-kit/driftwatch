@@ -13,4 +13,4 @@ Fix the test or the code.
 
 The paid pack also forbids emptied bodies, deleted test files, weakened
 matchers, and gutted snapshots, and the GitHub Action fails the PR
-(`skipped_test`) when those markers show up in the diff. This teaser does not.
+(`skipped_test`) when those markers show up in the diff, and `focused_test` for `it.only` / `fit` / `describe.only`. This teaser does not.

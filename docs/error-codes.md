@@ -42,6 +42,14 @@ CI: `out_of_scope` on `src/billing.py`. Split the PR or retitle and declare Scop
 
 CI: `skipped_test` in `test/auth.spec.js`. Test marked with `it.skip` introduced in the diff. PR blocked.
 
+## focused_test
+
+**Meaning.** A focused-only test runner was introduced so the rest of the suite stops running in CI.
+
+**When it fires.** The diff adds `it.only`, `describe.only`, `test.only`, `fit(`, `fdescribe(`, or `ftest(`. Ordinary `it` / `test` without `.only` do not fire.
+
+**Example.** `it(` → `it.only(` in a test file. CI: `focused_test`. Remove the focus marker before merging.
+
 ## emptied_test
 
 **Meaning.** The test wrapper is still there. The assertions are gone.
@@ -112,7 +120,7 @@ CI: `weakened_snapshot`. Gutted snapshots no longer pin behavior.
 
 **Meaning.** A new package appeared in a manifest and the PR never named it.
 
-**When it fires.** A new name is added in `package.json`, `requirements.txt` / `pyproject.toml`, `go.mod`, or `Cargo.toml` and that name is absent from the PR title and body. Version bumps of packages already in the manifest do not fire.
+**When it fires.** A new name is added in `package.json`, `requirements.txt` / `pyproject.toml`, `go.mod`, or `Cargo.toml` and that name is absent from the PR title and body — or a lockfile gains a new *direct* dependency identity without the matching manifest update and without a PR mention. Version bumps of packages already in the manifest do not fire.
 
 **Example.**
 

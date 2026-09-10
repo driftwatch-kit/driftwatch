@@ -7,7 +7,7 @@
 [![Agents](https://img.shields.io/badge/for-Cursor%20%7C%20Claude%20Code-purple)](https://github.com/driftwatch-kit/driftwatch)
 [![CI](https://img.shields.io/badge/runs%20in-GitHub%20Actions-blue)](https://github.com/driftwatch-kit/driftwatch)
 [![License](https://img.shields.io/badge/license-source--available-orange)](https://github.com/driftwatch-kit/driftwatch)
-[![Version](https://img.shields.io/badge/kit-v0.2.0-informational)](https://github.com/driftwatch-kit/driftwatch)
+[![Version](https://img.shields.io/badge/kit-v0.2.1-informational)](https://github.com/driftwatch-kit/driftwatch)
 
 Your AI pair programmer skips tests to pass the build, rewrites billing code during "typo fixes", or deletes flaky tests instead of fixing them. Driftwatch catches this before it ships.
 
@@ -46,12 +46,13 @@ Test marked with it.skip introduced in the diff. PR blocked.
 
 ## What's in v0
 
-Honest inventory of the paid Kit (v0.2.0, created 2026-08-31):
+Honest inventory of the paid Kit (v0.2.1 Watch drop, 2026-09-10; Kit lineage from 2026-08-31):
 
 - 7 enforceable Cursor rules
 - `AGENTS.md` + `CLAUDE.md`
 - GitHub Action + Python checker (stdlib only)
-- 31 eval fixtures
+- 36 eval fixtures
+- `scripts/install.sh` one-command copy into your repo
 
 Languages the checker looks at for tests, skips, and assertions: **JS/TS** (Jest / Vitest / Mocha), **Python** (pytest / unittest), **Rust** (`#[ignore]`). Dependency manifests: JS, Python, Go, Rust.
 
@@ -63,11 +64,12 @@ The Kit Action fails the job with these codes. Details: [`docs/error-codes.md`](
 
 - [`out_of_scope`](docs/error-codes.md#out_of_scope) — diff escaped the declared Scope (or a narrow "typo" title).
 - [`skipped_test`](docs/error-codes.md#skipped_test) — a skip / pending / ignore marker landed in the diff.
+- [`focused_test`](docs/error-codes.md#focused_test) — `it.only` / `fit` / `describe.only` (or siblings) landed in the diff.
 - [`emptied_test`](docs/error-codes.md#emptied_test) — test body became `pass`, empty, or assertion-free.
 - [`deleted_test`](docs/error-codes.md#deleted_test) — a test file was removed to go green.
 - [`weakened_assertion`](docs/error-codes.md#weakened_assertion) — a strong matcher was replaced by a weak one.
 - [`weakened_snapshot`](docs/error-codes.md#weakened_snapshot) — snapshot gutted or wildcarded.
-- [`unexplained_dependency`](docs/error-codes.md#unexplained_dependency) — a new package was not named in the PR.
+- [`unexplained_dependency`](docs/error-codes.md#unexplained_dependency) — a new package was not named in the PR (manifest or lockfile-only).
 
 ## Quick start (teaser rules)
 
@@ -85,6 +87,17 @@ curl -fsSL https://raw.githubusercontent.com/driftwatch-kit/driftwatch/main/.cur
 
 Leave the notice on each file intact.
 
+### Kit / Watch buyers — install the Action
+
+After Polar invite, clone the **private** kit, then from that checkout:
+
+```bash
+./scripts/install.sh /path/to/your/repo
+./scripts/install.sh --with-rules /path/to/your/repo
+```
+
+That copies Action + checker + workflow (and optionally rules). No phone-home. Details ship in the kit as `docs/install-action.md`.
+
 ## Pricing
 
 | Product | Price | What it is |
@@ -99,7 +112,7 @@ Checkout (Polar):
 
 ## Watch
 
-Watch ($12/mo or $99/year) is how the checker stays current as Cursor and Claude Code change. You get ongoing rule and heuristic updates, new error codes as new cheat patterns show up (Watch gets them before the next Kit major), and changelog notes on those failure modes. It is not a hosted scanner. The Kit still works without Watch.
+Watch ($12/mo or $99/year) is how the checker stays current as Cursor and Claude Code change. You get ongoing rule and heuristic updates, new error codes as new cheat patterns show up (Watch gets them before the next Kit major), and changelog notes on those failure modes. **0.2.1 is a Watch drop** (`focused_test`, lockfile-only deps, one-command install). It is not a hosted scanner. The Kit still works without Watch.
 
 ## Why not just use linters?
 
